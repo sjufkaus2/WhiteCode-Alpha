@@ -13,13 +13,25 @@
         <% } %>
         <link href="https://playentry.org/lib/entry-tool/dist/entry-tool.css" rel="stylesheet"/>
         <link href="https://playentry.org/lib/entry-lms/dist/assets/app.css" rel="stylesheet"/>
+        <style>
+            .entryScene, #workspace, .entryPlayground, #entryCategoryTab, .entryCategoryListWorkspace, .blockMenuContainer, .entryContainerListWorkspace, .entryContainerListElementWorkspace{
+                background-color: whitesmoke;
+            }
+            .entryBoard, .selectedObject, .entryObjectRotationWrapperWorkspace{
+                background-color: white !important;
+            }
+        </style>
     </head>
 
-    <body>
-        <section>
-            <button style="border: 1px solid black" onclick="changeWorkspaceMode('block')">Block Mode</button>
-            <button style="border: 1px solid black" onclick="changeWorkspaceMode('python')">Python Mode</button>
-        </section>
+    <body style="background-color: whitesmoke;">
+        <div style="background-color: whitesmoke; height: 5%;">
+            <img src="http://enturl.me/2i" height="90%" style="margin-left: 15px; margin-top: 5px; margin-bottom: 5px;">
+            <input style="border: 1px; border-color: black; color: white; background-color: #12b500; font-size: 16px; border-radius: 10px; width: 250px; height: 34px; position: absolute; top: 2.5%; margin-top: -17px; margin-left: 10px;" id="title" placeholder=" 제목을 입력하세요">
+            <button style="border: 0px; color: white; background-color: #12b500; font-size: 16px; border-radius: 10px; width: 100px; height: 34px; position: absolute; top: 2.5%; margin-top: -17px; margin-left: 200px;" id="download">저장</button>
+            <button style="border: 0px; color: white; background-color: #12b500; font-size: 16px; border-radius: 10px; width: 52px; height: 34px; position: absolute; top: 2.5%; margin-top: -17px; margin-left: 330px;" onclick="changeWorkspaceMode('block')">블록</button>
+            <button style="border: 0px; color: white; background-color: #12b500; font-size: 16px; border-radius: 10px; width: 72px; height: 34px; position: absolute; top: 2.5%; margin-top: -17px; margin-left: 400px;" onclick="changeWorkspaceMode('python')">파이썬</button>
+            <a id="save" style="border: 0px; color: white; background-color: #12b500; font-size: 16px; border-radius: 10px; width: 72px; height: 34px; position: absolute; top: 2.5%; margin-top: -17px; margin-left: 500px;" download="project.wcp">PC에 저장</a>
+        </div>
         <div id="workspace"></div>
 
         <!--language-->
@@ -53,6 +65,34 @@
         <script type="text/javascript" src="https://playentry.org/lib/entry-lms/dist/assets/app.js"></script>
         <script type="text/javascript" src="https://playentry.org/lib/literallycanvas-mobile/lib/js/literallycanvas.js"></script>
         <script type="text/javascript" src="https://playentry.org/lib/entry-tool/dist/entry-tool.js"></script>
+
+        <script>
+            (function () {
+                var textFile = null,
+                makeTextFile = function (text) {
+                    var data = new Blob([text], {type: 'text/plain'});
+
+                    // If we are replacing a previously generated file we need to
+                    // manually revoke the object URL to avoid memory leaks.
+                    if (textFile !== null) {
+                      window.URL.revokeObjectURL(textFile);
+                    }
+
+                    textFile = window.URL.createObjectURL(data);
+
+                    return textFile;
+                };
+
+
+                var create = document.getElementById('download'),
+                    textbox = document.getElementById('title');
+
+                create.addEventListener('click', function () {
+                    var link = document.getElementById('save');
+                    link.href = makeTextFile(textbox.value);
+                }, false);
+            })();
+        </script>
 
         <script src="../extern/util/static.js"></script>
         <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
