@@ -7,7 +7,7 @@
             name="viewport"
             content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"
         />
-        <title><%= htmlWebpackPlugin.options.title %></title>
+        <title>WhiteCode by thoratica</title>
         <% for (var css in htmlWebpackPlugin.files.css) { %>
         <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet" />
         <% } %>
@@ -25,7 +25,7 @@
 
     <body style="background-color: whitesmoke;">
         <div style="background-color: whitesmoke; height: 5%;">
-            <img src="http://enturl.me/2i" height="90%" style="margin-left: 15px; margin-top: 5px; margin-bottom: 5px;">
+            <img src="https://i.imgur.com/vMggS5p.png" height="90%" style="margin-left: 15px; margin-top: 5px; margin-bottom: 5px;">
             <input style="border: 1px; border-color: black; color: white; background-color: #12b500; font-size: 16px; border-radius: 10px; width: 250px; height: 34px; position: absolute; top: 2.5%; margin-top: -17px; margin-left: 10px;" id="title" placeholder=" 제목을 입력하세요">
             <button style="border: 0px; color: white; background-color: #12b500; font-size: 16px; border-radius: 10px; width: 100px; height: 34px; position: absolute; top: 2.5%; margin-top: -17px; margin-left: 200px;" id="download">저장</button>
             <button style="border: 0px; color: white; background-color: #12b500; font-size: 16px; border-radius: 10px; width: 52px; height: 34px; position: absolute; top: 2.5%; margin-top: -17px; margin-left: 330px;" onclick="changeWorkspaceMode('block')">블록</button>
@@ -85,11 +85,11 @@
 
 
                 var create = document.getElementById('download'),
-                    textbox = document.getElementById('title');
+                    content = Entry.exportProject()
 
                 create.addEventListener('click', function () {
                     var link = document.getElementById('save');
-                    link.href = makeTextFile(textbox.value);
+                    link.href = makeTextFile(content.value);
                 }, false);
             })();
         </script>

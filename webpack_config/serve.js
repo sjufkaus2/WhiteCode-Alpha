@@ -16,7 +16,7 @@ const templateName = (() => {
     }
 })();
 const template = path.resolve('example', templateName);
-const devServerPort = 8080;
+const devServerPort = 80;
 
 module.exports = merge(common, {
     mode: 'development',
@@ -39,11 +39,11 @@ module.exports = merge(common, {
         publicPath: '/',
         proxy: {
             '/lib/entry-js': {
-                target: `http://localhost:${devServerPort}`,
+                target: `http://192.168.219.106:${devServerPort}`,
                 pathRewrite: { '^/lib/entry-js': '' },
             },
             '/dist': {
-                target: `http://localhost:${devServerPort}`,
+                target: `http://192.168.219.106:${devServerPort}`,
                 pathRewrite: { '^/dist': '' },
             },
         },
